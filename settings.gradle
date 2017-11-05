@@ -1,0 +1,18 @@
+rootProject.name = 'cloud'
+
+include(':cloud-eureka')
+project(':cloud-eureka').projectDir = new File(settingsDir, 'cloud-eureka')
+
+include(':cloud-config')
+project(':cloud-config').projectDir = new File(settingsDir, 'cloud-config')
+
+include(':cloud-zuul')
+project(':cloud-zuul').projectDir = new File(settingsDir, 'cloud-zuul')
+
+include(':cloud-dashboard-hystrix')
+project(':cloud-dashboard-hystrix').projectDir = new File(settingsDir, 'cloud-dashboard-hystrix')
+
+include(':cloud-dashboard-admin')
+project(':cloud-dashboard-admin').projectDir = new File(settingsDir, 'cloud-dashboard-admin')
+
+

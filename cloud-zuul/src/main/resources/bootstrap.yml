@@ -1,0 +1,55 @@
+server:
+  port: 8060
+
+
+spring:
+  application:
+    name: zuul
+  sleuth:
+    sampler:
+      percentage: 1
+  cloud:
+    config:
+      name: cloud-zuul
+      profile: dev
+      uri: http://localhost:8888
+      username:
+      password:
+      discovery:
+        enabled: false
+        service-id: cloud-config
+
+
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+            defaultZone: http://localhost:8761/eureka/
+
+# Disable Hystrix timeout globally (for all services)
+#hystrix.command.default.execution.timeout.enabled: false
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
+#hystrix.command.service-a.execution.timeout.enabled: false
+
+# Disable Hystrix timeout for a single service
+#hystrix.command.<serviceName>.execution.timeout.enabled: false
+
+# Increase the Hystrix timeout to 60s (globally)
+#hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
+
+# Increase the Hystrix timeout to 60s (per service)
+#hystrix.command.<serviceName>.execution.isolation.thread.timeoutInMilliseconds: 60000
+
+zuul:
+  routes:
+    cloud-service-consumer:
+      path: /**
+      serviceId: cloud-service-consumer
+
+endpoints:
+ shutdown:
+  enabled: true
